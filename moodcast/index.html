@@ -6,8 +6,40 @@
     <link rel="stylesheet" href="style.css">
     <title>Moodcast</title>
   </head>
-  <body>
-    <div id="app"></div>
+  <body class="min-h-screen bg-gradient-to-b from-blue-100 to-blue-300 flex items-center justify-center p-4">
+     <div class="w-full max-w-xl bg-white shadow-xl rounded-2xl p-6 space-y-6">
+      <h1 class="text-3xl font-bold text-center">🌤️ Moodcast</h1>
+
+      <!-- Weather Info -->
+      <div id="weather" class="text-center text-lg font-medium">
+        <h2 id="location"></h2>
+        <div>
+          <h1 id="degree"></h1>
+          <img id="icon" src="" alt="">
+        </div>
+        
+        <p id="description"></p>
+      </div>
+
+      <!-- Mood Buttons -->
+      <div class="text-center">
+        <p class="mb-2">What's your mood?</p>
+        <div class="flex justify-center gap-3 flex-wrap">
+          <button class="mood-btn px-4 py-2 rounded bg-blue-200 hover:bg-blue-300" data-mood="Chill">Chill</button>
+          <button class="mood-btn px-4 py-2 rounded bg-yellow-200 hover:bg-yellow-300" data-mood="Productive">Productive</button>
+          <button class="mood-btn px-4 py-2 rounded bg-pink-200 hover:bg-pink-300" data-mood="Romantic">Romantic</button>
+          <button class="mood-btn px-4 py-2 rounded bg-green-200 hover:bg-green-300" data-mood="Adventurous">Adventurous</button>
+        </div>
+      </div>
+
+      <!-- Suggestions -->
+      <div id="suggestions" class="text-center mt-4 space-y-2 hidden">
+        <h2 class="text-xl font-semibold">Here's what we recommend:</h2>
+        <p id="music" class="text-md">🎵 Music: ...</p>
+        <p id="movie" class="text-md">🎬 Movie: ...</p>
+        <p id="activity" class="text-md">🧘 Activity: ...</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
