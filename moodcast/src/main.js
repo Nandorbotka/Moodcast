@@ -6,12 +6,13 @@ const WEATHER_API_KEY = "4e9393cfb7374c6c6a437848f6050136";
 const fetchBtn = document.getElementById("fetchBtn");
 const moodBtnDiv = document.getElementById("mood-btn-div");
 const moodBtns = document.getElementsByClassName("mood-btn");
+const weatherInfo = document.getElementById("weather");
 
 let mood = "";
 let weatherDescription = "";
 let temperature = 0;
 
-window.addEventListener("load", () => {
+fetchBtn.addEventListener("click", () => {
     const location = document.getElementById("location");
     const degree = document.getElementById("degree");
     const icon = document.getElementById("icon");
@@ -42,6 +43,8 @@ window.addEventListener("load", () => {
                 body.style.backgroundImage = `url("../assets/backgrounds/${data.current.weather[0].icon}.jpg")`;
 
                 fetchBtn.classList.toggle("hidden");
+                weatherInfo.classList.remove("hidden");
+                weatherInfo.classList.add("flex");
                 moodBtnDiv.classList.toggle("hidden");
             } catch (error) {
                 console.error("Weather API error:", error);
@@ -78,6 +81,7 @@ Keep it short, creative, and friendly.`;
     }
 
     const data = await response.json();
+    console.log(data);
     return data.choices[0].message.content;
 }
 
@@ -88,9 +92,23 @@ Array.from(moodBtns).forEach((btn) => {
 
         getSuggestions(mood, weatherDescription, temperature)
             .then((suggestion) => {
-                const suggestions = document.getElementById("suggestions");
-                suggestions.textContent = suggestion;
-                suggestions.classList.remove("hidden");
+                const suggestionsDiv = document.getElementById("suggestions");
+
+                // Split the suggestion string by newline
+                const lines = suggestion
+                    .split("\n")
+                    .filter((line) => line.trim() !== "");
+
+                // Create HTML elements for each suggestion
+                const formatted = lines
+                    .map((line) => {
+                        const [label, content] = line.split(":");
+                        return `<p><strong>${label.trim()}:</strong> ${content.trim()}</p>`;
+                    })
+                    .join("");
+
+                suggestionsDiv.innerHTML = formatted;
+                suggestionsDiv.classList.remove("hidden");
             })
             .catch((error) => {
                 console.error("AI error:", error);
