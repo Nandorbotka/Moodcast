@@ -1,4 +1,4 @@
-import "/style.css";
+import "./style.css";
 
 const fetchBtn = document.getElementById("fetchBtn");
 const moodBtnDiv = document.getElementById("mood-btn-div");
