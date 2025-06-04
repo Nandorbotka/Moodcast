@@ -79,7 +79,7 @@ fetchBtn.addEventListener("click", () => {
             showLoader(weatherLoader);
             try {
                 const response = await fetch(
-                    `http://localhost:3000/api/weather?lat=${latitude}&lon=${longitude}`
+                    `https://moodcast-6bd269b99874.herokuapp.com/api/weather?lat=${latitude}&lon=${longitude}`
                 );
 
                 const data = await response.json();
@@ -112,13 +112,16 @@ fetchBtn.addEventListener("click", () => {
 
 async function getSuggestions(mood, description, temperature) {
     try {
-        const response = await fetch("http://localhost:3000/api/suggestions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ mood, description, temperature }),
-        });
+        const response = await fetch(
+            "https://moodcast-6bd269b99874.herokuapp.com/api/suggestions",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ mood, description, temperature }),
+            }
+        );
 
         if (!response.ok) {
             const errorData = await response.json();
