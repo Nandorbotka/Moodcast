@@ -90,12 +90,11 @@ fetchBtn.addEventListener("click", () => {
 
                 location.textContent = data.timezone;
                 degree.textContent = `${temperature} °C`;
-                icon.setAttribute(
-                    "src",
-                    `/icons/${data.current.weather[0].icon}.png`
-                );
+                const iconPath = `/icons/${data.current.weather[0].icon}.png`;
+                icon.setAttribute("src", iconPath);
                 description.textContent = weatherDescription;
-                body.style.backgroundImage = `url("/backgrounds/${data.current.weather[0].icon}.jpg")`;
+                const backgroundPath = `url("/backgrounds/${data.current.weather[0].icon}.jpg")`;
+                body.style.backgroundImage = backgroundPath;
 
                 fetchBtn.classList.toggle("hidden");
                 weatherInfo.classList.remove("hidden");
