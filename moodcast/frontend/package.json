@@ -12,9 +12,9 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.8",
     "dotenv": "^16.5.0",
     "openai": "^4.103.0",
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.8"
   }
 }

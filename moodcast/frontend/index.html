@@ -27,33 +27,37 @@
       </div>
 
       <!-- Mood Buttons -->
-      <div id="mood-btn-div" class="text-center hidden mt-10">
+      <div id="mood-btn-div" class="text-center mt-10 hidden">
         
 
-        <p class="mb-8 text-white text-3xl">What's your mood?</p>
-        <div id="cooldown" class="text-center text-sm text-gray-300 mt-2 hidden">
-          <p>Embrace the moment.</p>
-          <p class="mt-1">Breathe in... and out.</p>
-          <p>
+        <p id="mood-p" class="mb-8 text-white text-3xl">What's your mood?</p>
+        
+        <div id="cooldown" class="text-center mt-2 px-20 hidden ">
+          <p class="text-xl font-semibold text-white">Embrace the moment...</p>
+          <div id="breathing-div" class="h-20 w-20 rounded-full bg-sky-300 shadow-2xl shadow-sky-950 m-auto"></div>
+          <p class="text-lg text-sky-50">
           Focus on your breath for 
             <span id="cooldown-timer" class="transition-all duration-300 ease-in-out inline-block font-semibold text-lg text-white scale-100">
             </span>s.
           </p>
-          <p class="mt-1">Be present right here, right now. Then, if you wish, you can make another request.</p>
+          <p class="mt-1 text-sky-50">Be present right here, right now. Then, if you wish, you can make another request.</p>
         </div>
-        <div class="flex justify-center gap-3 flex-wrap mt-3">
-          <button mood="chill" class="mood-btn px-4 py-2 rounded bg-blue-200 hover:bg-blue-300" data-mood="Chill">Chill</button>
-          <button mood="productive" class="mood-btn px-4 py-2 rounded bg-yellow-200 hover:bg-yellow-300" data-mood="Productive">Productive</button>
-          <button mood="romantic" class="mood-btn px-4 py-2 rounded bg-pink-200 hover:bg-pink-300" data-mood="Romantic">Romantic</button>
-          <button mood="adventurous" class="mood-btn px-4 py-2 rounded bg-green-200 hover:bg-green-300" data-mood="Adventurous">Adventurous</button>
+        <div id="mood-btns-line" class="flex justify-center gap-3 flex-wrap mt-3">
+          <button mood="chill" class="mood-btn cursor-pointer text-sky-900 px-4 py-2 rounded bg-blue-200 hover:bg-blue-300" data-mood="Chill">Chill</button>
+          <button mood="productive" class="mood-btn cursor-pointer text-sky-900 px-4 py-2 rounded bg-yellow-200 hover:bg-yellow-300" data-mood="Productive">Productive</button>
+          <button mood="romantic" class="mood-btn cursor-pointer text-sky-900 px-4 py-2 rounded bg-pink-200 hover:bg-pink-300" data-mood="Romantic">Romantic</button>
+          <button mood="adventurous" class="mood-btn cursor-pointer text-sky-900 px-4 py-2 rounded bg-green-200 hover:bg-green-300" data-mood="Adventurous">Adventurous</button>
         </div>
       </div>
 
       <!-- Suggestions -->
        <div id="suggestion-loader" class="loader m-auto my-10 hidden"></div>
       <div id="suggestions" class="text-center text-lg font-medium text-white hidden space-y-6 px-2 py-4 rounded-2xl bg-sky-900 shadow-2xl">
-        
       </div>
+      <div class="m-auto w-fit">
+        <button id="mood-change-btn" class="px-4 py-2   rounded bg-gradient-to-r from-sky-300 to-emerald-300 text-sky-950 hover:from-emerald-300 hover:to-sky-300 cursor-pointer hidden">My mood has changed</button>
+      </div>
+      
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

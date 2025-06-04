@@ -24,3 +24,20 @@ body {
     60%{background-position:0%  50%, 50% 100%,100%   0%}
     80%{background-position:0%  50%, 50%  50%,100% 100%}
 }
+
+#breathing-div {
+animation: breathe 4.5s linear infinite;
+}
+
+@keyframes breathe {
+  0% {
+    transform: rotate(-45deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1);
+  }
+  100% {
+    transform: rotate(-45deg) scale(0.8);
+  }
+
+}

@@ -1,23 +1,23 @@
 import "./style.css";
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-const WEATHER_API_KEY = "4e9393cfb7374c6c6a437848f6050136";
-
 const fetchBtn = document.getElementById("fetchBtn");
 const moodBtnDiv = document.getElementById("mood-btn-div");
 const moodBtns = document.getElementsByClassName("mood-btn");
+const moodBtnsLine = document.getElementById("mood-btns-line");
 const weatherInfo = document.getElementById("weather");
 const weatherLoader = document.getElementById("weather-loader");
 const suggestionLoader = document.getElementById("suggestion-loader");
 const suggestionsDiv = document.getElementById("suggestions");
 const cooldownDiv = document.getElementById("cooldown");
 const cooldownTimer = document.getElementById("cooldown-timer");
-let isCooldown = false;
 const moodBtnArr = Array.from(moodBtns);
+const moodChgBtn = document.getElementById("mood-change-btn");
+const moodP = document.getElementById("mood-p");
 
 let mood = "";
 let weatherDescription = "";
 let temperature = 0;
+let isCooldown = false;
 
 function showLoader(loader) {
     loader.classList.remove("hidden");
@@ -37,7 +37,7 @@ function moodBtnActive() {
 function startCooldown(seconds = 30) {
     isCooldown = true;
     cooldownDiv.classList.remove("hidden");
-    moodBtnActive();
+    moodP.classList.add("hidden");
 
     let remaining = seconds;
     cooldownTimer.textContent = remaining;
@@ -59,6 +59,9 @@ function startCooldown(seconds = 30) {
             isCooldown = false;
             cooldownDiv.classList.add("hidden");
             moodBtnActive();
+            moodBtnsLine.classList.remove("hidden");
+            moodP.classList.remove("hidden");
+            moodP.textContent = "What's your mood?";
         }
     }, 1000);
 }
@@ -76,7 +79,7 @@ fetchBtn.addEventListener("click", () => {
             showLoader(weatherLoader);
             try {
                 const response = await fetch(
-                    `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${WEATHER_API_KEY}`
+                    `http://localhost:3000/api/weather?lat=${latitude}&lon=${longitude}`
                 );
 
                 const data = await response.json();
@@ -108,35 +111,26 @@ fetchBtn.addEventListener("click", () => {
 });
 
 async function getSuggestions(mood, description, temperature) {
-    const prompt = `It's ${temperature}°C and ${description.toLowerCase()}.
-I'm feeling ${mood.toLowerCase()}.
-Suggest a fun:
-- 🎵 Song
-- 🎬 Movie
-- 🧘 Activity
-Keep it short, creative, and friendly.`;
+    try {
+        const response = await fetch("http://localhost:3000/api/suggestions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ mood, description, temperature }),
+        });
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.7,
-        }),
-    });
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Server error: ${errorData.error}`);
+        }
 
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`OpenAI error: ${errorData.error.message}`);
+        const data = await response.json();
+        return data.suggestion;
+    } catch (error) {
+        console.error("Frontend suggestion fetch error:", error);
+        throw error;
     }
-
-    const data = await response.json();
-    console.log(data);
-    return data.choices[0].message.content;
 }
 
 moodBtnArr.forEach((btn) => {
@@ -144,6 +138,7 @@ moodBtnArr.forEach((btn) => {
         console.log("Clicked:", btn.dataset.mood);
         mood = btn.dataset.mood;
         suggestionsDiv.classList.add("hidden");
+        moodBtnActive();
         showLoader(suggestionLoader);
 
         getSuggestions(mood, weatherDescription, temperature)
@@ -169,7 +164,15 @@ moodBtnArr.forEach((btn) => {
             })
             .finally(() => {
                 hideLoader(suggestionLoader);
-                startCooldown(30);
+                moodChgBtn.classList.remove("hidden");
+                moodBtnsLine.classList.add("hidden");
+                moodP.textContent = mood;
             });
     });
+});
+
+moodChgBtn.addEventListener("click", () => {
+    startCooldown(60);
+    suggestionsDiv.classList.add("hidden");
+    moodChgBtn.classList.add("hidden");
 });
