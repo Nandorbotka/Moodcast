@@ -1,4 +1,4 @@
-import "./style.css";
+import "/style.css";
 
 const fetchBtn = document.getElementById("fetchBtn");
 const moodBtnDiv = document.getElementById("mood-btn-div");
@@ -92,10 +92,10 @@ fetchBtn.addEventListener("click", () => {
                 degree.textContent = `${temperature} °C`;
                 icon.setAttribute(
                     "src",
-                    `../assets/icons/${data.current.weather[0].icon}.png`
+                    `/icons/${data.current.weather[0].icon}.png`
                 );
                 description.textContent = weatherDescription;
-                body.style.backgroundImage = `url("../assets/backgrounds/${data.current.weather[0].icon}.jpg")`;
+                body.style.backgroundImage = `url("/backgrounds/${data.current.weather[0].icon}.jpg")`;
 
                 fetchBtn.classList.toggle("hidden");
                 weatherInfo.classList.remove("hidden");
