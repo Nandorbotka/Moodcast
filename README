@@ -1,0 +1,39 @@
+# 🌤️ Moodcast – AI-Powered Mood & Weather App
+
+**Moodcast** is a fun, full-stack web app that blends **weather data** with your **current mood** to give creative AI-generated suggestions — songs, movies, and activities that match how you feel and what the weather’s like.  
+Built with **Vite + Vanilla JS** on the frontend and **Node.js / Express + OpenAI + OpenWeather API** on the backend.
+
+---
+
+## 🚀 Features
+
+- 🧭 **Real-time Weather** — Fetches your location’s live weather using the **OpenWeather API**  
+- 🤖 **AI-Powered Recommendations** — Uses **OpenAI GPT-3.5** to suggest songs, movies, and activities  
+- 🌍 **Automatic Geolocation** — Detects your position for localized weather  
+- 💫 **Cooldown Timer** — Smooth cooldown animation to prevent repeated API requests  
+- 🎨 **Modern Responsive UI** — Styled with **TailwindCSS**  
+- 🔗 **Full-Stack Setup** — Deployed backend (Render) + local frontend support  
+
+---
+
+## 🧰 Tech Stack
+
+### 🖥️ Frontend
+- **Vite** + **Vanilla JavaScript**
+- **TailwindCSS**
+- **Browser Geolocation API**
+
+### ⚙️ Backend
+- **Node.js** + **Express**
+- **Axios**, **CORS**, **dotenv**
+- **OpenWeather API** (for weather)
+- **OpenAI API** (for suggestions)
+
+---
+
+## ⚙️ Project Setup
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/Nandorbotka/Moodcast
+cd Moodcast
