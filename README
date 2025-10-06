@@ -37,3 +37,50 @@ Built with **Vite + Vanilla JS** on the frontend and **Node.js / Express + OpenA
 ```bash
 git clone https://github.com/Nandorbotka/Moodcast
 cd Moodcast
+
+---
+
+## 🦶 Run locally
+
+🧩 Environment Setup Guide
+
+If you clone this repository and want to run Moodcast locally, you’ll need to set up your own API keys.  
+For security reasons, the `.env` files (which store these keys) are **not included** in the repository.
+
+Follow these simple steps to make it work:
+
+### 1️⃣ Create `.env` files from the examples
+
+In both the **frontend** and **backend** folders, you’ll find `.env.example` files.
+
+Copy them and rename to `.env`:
+
+```bash
+# In the backend folder
+cp .env.example .env
+
+# In the frontend folder
+cp .env.example .env
+
+#Add your API keys
+
+    -- moodcast/backend/.env
+    OPENAI_API_KEY=your_openai_key_here
+    WEATHER_API_KEY=your_openweather_key_here
+    PORT=3000
+
+    -- moodcast/frontend/.env
+    VITE_API_BASE_URL=http://localhost:3000
+
+# Start backend
+cd moodcast/backend
+npm run start
+
+# Start frontend (in a new terminal)
+cd moodcast/frontend
+npm run dev
+
+
+
+
+
